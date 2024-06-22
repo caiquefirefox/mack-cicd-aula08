@@ -2,8 +2,13 @@ name: CI-CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      input:
+        description: "Execute CI/CD"
+        required: false
+        default: "Execute CI/CD manually"
 
 jobs:
   build:
