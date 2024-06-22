@@ -97,7 +97,9 @@ jobs:
         scp -i key.pem -r ./* $EC2_USER@$EC2_HOST:/home/$EC2_USER/my-flask-app
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
           cd /home/${{ secrets.EC2_USER }}/my-flask-app
-          python -m pip install --upgrade pip
+          python3 -m venv venv  # Criar ambiente virtual Python
+          source venv/bin/activate
+          pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade flask flasgger
           nohup python app.py > app.log 2>&1 &
