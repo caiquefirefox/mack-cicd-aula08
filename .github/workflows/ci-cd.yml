@@ -91,6 +91,9 @@ jobs:
         ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
         echo "$SSH_KEY" > key.pem
         chmod 600 key.pem
+        ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
+          mkdir -p /home/$EC2_USER/my-flask-app
+        EOF
         scp -i key.pem -r ./* $EC2_USER@$EC2_HOST:/home/$EC2_USER/my-flask-app
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
           cd /home/$EC2_USER/my-flask-app
