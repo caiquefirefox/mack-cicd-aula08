@@ -92,11 +92,11 @@ jobs:
         echo "$SSH_KEY" > key.pem
         chmod 600 key.pem
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
-          mkdir -p /home/$EC2_USER/my-flask-app
+          mkdir -p /home/${{ secrets.EC2_USER }}/my-flask-app
         EOF
         scp -i key.pem -r ./* $EC2_USER@$EC2_HOST:/home/$EC2_USER/my-flask-app
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
-          cd /home/$EC2_USER/my-flask-app
+          cd /home/${{ secrets.EC2_USER }}/my-flask-app
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade flask flasgger
