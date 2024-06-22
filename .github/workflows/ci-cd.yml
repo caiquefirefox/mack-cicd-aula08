@@ -94,7 +94,9 @@ jobs:
         scp -i key.pem -r ./* $EC2_USER@$EC2_HOST:/home/$EC2_USER/my-flask-app
         ssh -i key.pem $EC2_USER@$EC2_HOST << 'EOF'
           cd /home/$EC2_USER/my-flask-app
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install --upgrade flask flasgger
           nohup python app.py > app.log 2>&1 &
           sudo systemctl start my-flask-app
         EOF
