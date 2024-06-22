@@ -103,5 +103,7 @@ jobs:
           pip install -r requirements.txt
           pip install --upgrade flask flasgger
           nohup python app.py > app.log 2>&1 &
-          sudo systemctl start my-flask-app
+          sudo systemctl daemon-reload  # Recarregar configurações do systemd
+          sudo systemctl start my-flask-app  # Iniciar o serviço
+          sudo systemctl enable my-flask-app  # Habilitar o serviço para iniciar na inicialização
         EOF
