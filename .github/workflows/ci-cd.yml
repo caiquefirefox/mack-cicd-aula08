@@ -60,6 +60,8 @@ jobs:
           args: >
             -Dsonar.sources=.
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
 
   deploy:
     runs-on: ubuntu-latest
